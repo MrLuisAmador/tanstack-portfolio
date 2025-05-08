@@ -11,8 +11,13 @@
 // Import Routes
 
 import { Route as rootRoute } from './routes/__root'
+import { Route as ServicesImport } from './routes/services'
 import { Route as RedirectImport } from './routes/redirect'
+import { Route as ProjectsImport } from './routes/projects'
 import { Route as DeferredImport } from './routes/deferred'
+import { Route as ContactImport } from './routes/contact'
+import { Route as BlogsImport } from './routes/blogs'
+import { Route as AboutImport } from './routes/about'
 import { Route as PathlessLayoutImport } from './routes/_pathlessLayout'
 import { Route as UsersRouteImport } from './routes/users.route'
 import { Route as PostsRouteImport } from './routes/posts.route'
@@ -28,15 +33,45 @@ import { Route as PathlessLayoutNestedLayoutRouteAImport } from './routes/_pathl
 
 // Create/Update Routes
 
+const ServicesRoute = ServicesImport.update({
+  id: '/services',
+  path: '/services',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const RedirectRoute = RedirectImport.update({
   id: '/redirect',
   path: '/redirect',
   getParentRoute: () => rootRoute,
 } as any)
 
+const ProjectsRoute = ProjectsImport.update({
+  id: '/projects',
+  path: '/projects',
+  getParentRoute: () => rootRoute,
+} as any)
+
 const DeferredRoute = DeferredImport.update({
   id: '/deferred',
   path: '/deferred',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const ContactRoute = ContactImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const BlogsRoute = BlogsImport.update({
+  id: '/blogs',
+  path: '/blogs',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const AboutRoute = AboutImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -146,6 +181,27 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PathlessLayoutImport
       parentRoute: typeof rootRoute
     }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutImport
+      parentRoute: typeof rootRoute
+    }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsImport
+      parentRoute: typeof rootRoute
+    }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactImport
+      parentRoute: typeof rootRoute
+    }
     '/deferred': {
       id: '/deferred'
       path: '/deferred'
@@ -153,11 +209,25 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof DeferredImport
       parentRoute: typeof rootRoute
     }
+    '/projects': {
+      id: '/projects'
+      path: '/projects'
+      fullPath: '/projects'
+      preLoaderRoute: typeof ProjectsImport
+      parentRoute: typeof rootRoute
+    }
     '/redirect': {
       id: '/redirect'
       path: '/redirect'
       fullPath: '/redirect'
       preLoaderRoute: typeof RedirectImport
+      parentRoute: typeof rootRoute
+    }
+    '/services': {
+      id: '/services'
+      path: '/services'
+      fullPath: '/services'
+      preLoaderRoute: typeof ServicesImport
       parentRoute: typeof rootRoute
     }
     '/_pathlessLayout/_nested-layout': {
@@ -284,8 +354,13 @@ export interface FileRoutesByFullPath {
   '/posts': typeof PostsRouteRouteWithChildren
   '/users': typeof UsersRouteRouteWithChildren
   '': typeof PathlessLayoutNestedLayoutRouteWithChildren
+  '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRoute
+  '/contact': typeof ContactRoute
   '/deferred': typeof DeferredRoute
+  '/projects': typeof ProjectsRoute
   '/redirect': typeof RedirectRoute
+  '/services': typeof ServicesRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts/': typeof PostsIndexRoute
@@ -298,8 +373,13 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '': typeof PathlessLayoutNestedLayoutRouteWithChildren
+  '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRoute
+  '/contact': typeof ContactRoute
   '/deferred': typeof DeferredRoute
+  '/projects': typeof ProjectsRoute
   '/redirect': typeof RedirectRoute
+  '/services': typeof ServicesRoute
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
   '/posts': typeof PostsIndexRoute
@@ -315,8 +395,13 @@ export interface FileRoutesById {
   '/posts': typeof PostsRouteRouteWithChildren
   '/users': typeof UsersRouteRouteWithChildren
   '/_pathlessLayout': typeof PathlessLayoutRouteWithChildren
+  '/about': typeof AboutRoute
+  '/blogs': typeof BlogsRoute
+  '/contact': typeof ContactRoute
   '/deferred': typeof DeferredRoute
+  '/projects': typeof ProjectsRoute
   '/redirect': typeof RedirectRoute
+  '/services': typeof ServicesRoute
   '/_pathlessLayout/_nested-layout': typeof PathlessLayoutNestedLayoutRouteWithChildren
   '/posts/$postId': typeof PostsPostIdRoute
   '/users/$userId': typeof UsersUserIdRoute
@@ -334,8 +419,13 @@ export interface FileRouteTypes {
     | '/posts'
     | '/users'
     | ''
+    | '/about'
+    | '/blogs'
+    | '/contact'
     | '/deferred'
+    | '/projects'
     | '/redirect'
+    | '/services'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts/'
@@ -347,8 +437,13 @@ export interface FileRouteTypes {
   to:
     | '/'
     | ''
+    | '/about'
+    | '/blogs'
+    | '/contact'
     | '/deferred'
+    | '/projects'
     | '/redirect'
+    | '/services'
     | '/posts/$postId'
     | '/users/$userId'
     | '/posts'
@@ -362,8 +457,13 @@ export interface FileRouteTypes {
     | '/posts'
     | '/users'
     | '/_pathlessLayout'
+    | '/about'
+    | '/blogs'
+    | '/contact'
     | '/deferred'
+    | '/projects'
     | '/redirect'
+    | '/services'
     | '/_pathlessLayout/_nested-layout'
     | '/posts/$postId'
     | '/users/$userId'
@@ -380,8 +480,13 @@ export interface RootRouteChildren {
   PostsRouteRoute: typeof PostsRouteRouteWithChildren
   UsersRouteRoute: typeof UsersRouteRouteWithChildren
   PathlessLayoutRoute: typeof PathlessLayoutRouteWithChildren
+  AboutRoute: typeof AboutRoute
+  BlogsRoute: typeof BlogsRoute
+  ContactRoute: typeof ContactRoute
   DeferredRoute: typeof DeferredRoute
+  ProjectsRoute: typeof ProjectsRoute
   RedirectRoute: typeof RedirectRoute
+  ServicesRoute: typeof ServicesRoute
   PostsPostIdDeepRoute: typeof PostsPostIdDeepRoute
 }
 
@@ -390,8 +495,13 @@ const rootRouteChildren: RootRouteChildren = {
   PostsRouteRoute: PostsRouteRouteWithChildren,
   UsersRouteRoute: UsersRouteRouteWithChildren,
   PathlessLayoutRoute: PathlessLayoutRouteWithChildren,
+  AboutRoute: AboutRoute,
+  BlogsRoute: BlogsRoute,
+  ContactRoute: ContactRoute,
   DeferredRoute: DeferredRoute,
+  ProjectsRoute: ProjectsRoute,
   RedirectRoute: RedirectRoute,
+  ServicesRoute: ServicesRoute,
   PostsPostIdDeepRoute: PostsPostIdDeepRoute,
 }
 
@@ -409,8 +519,13 @@ export const routeTree = rootRoute
         "/posts",
         "/users",
         "/_pathlessLayout",
+        "/about",
+        "/blogs",
+        "/contact",
         "/deferred",
+        "/projects",
         "/redirect",
+        "/services",
         "/posts_/$postId/deep"
       ]
     },
@@ -437,11 +552,26 @@ export const routeTree = rootRoute
         "/_pathlessLayout/_nested-layout"
       ]
     },
+    "/about": {
+      "filePath": "about.tsx"
+    },
+    "/blogs": {
+      "filePath": "blogs.tsx"
+    },
+    "/contact": {
+      "filePath": "contact.tsx"
+    },
     "/deferred": {
       "filePath": "deferred.tsx"
     },
+    "/projects": {
+      "filePath": "projects.tsx"
+    },
     "/redirect": {
       "filePath": "redirect.tsx"
+    },
+    "/services": {
+      "filePath": "services.tsx"
     },
     "/_pathlessLayout/_nested-layout": {
       "filePath": "_pathlessLayout/_nested-layout.tsx",
